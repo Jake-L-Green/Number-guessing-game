@@ -1,0 +1,57 @@
+import random
+import time
+def main():
+    introduction()
+    random_number = get_number()
+    guessing_game(random_number)
+    end()
+    
+    
+    
+
+def introduction():
+    print("Hello, welcome to the number guessing game")
+    time.sleep(3)
+
+def get_number():
+    global lowest
+    global highest
+    lowest = int(input("Please type your lowest number range\n"))
+    highest = int(input("Please type your highest number range\n"))
+    return random.randint(lowest, highest)
+
+
+def guessing_game(random_number):
+    global player_guesses
+    player_guesses = 0
+    player_guess = ""
+    while player_guess != random_number:
+        player_guess = int(input(f"I'm thinking of a number between {lowest} and {highest}\n"))
+        player_guesses += 1
+        if player_guess <= random_number * 0.75 and player_guess > random_number * 0.35 or player_guess >= random_number * 1.35 and player_guess < random_number * 1.75:
+            print("Youre guess is far away from my number")
+            time.sleep(2)
+        if player_guess < random_number and player_guess > random_number * 0.75 or player_guess > random_number and player_guess < random_number * 1.35:
+            print("Youre very close to my number")
+            time.sleep(2)
+        if player_guess <= random_number * 0.35 or player_guess >= random_number * 1.75:
+            print("Youre very far away from my number")
+            time.sleep(2)
+        if player_guesses == 2 and player_guess != random_number:
+            print(f"The number im thinking of is somewhere from {int(random_number *0.35)} to {int(random_number * 1.65)}")
+            time.sleep(2)
+        if player_guesses == 4 and player_guess != random_number:
+            print(f"The number im thinking of is somewhere from {int(random_number *0.60)} to {int(random_number * 1.40)}")
+            time.sleep(2)
+        if player_guesses == 6 and player_guess != random_number:
+            print(f"The number im thinking of is somewhere from {int(random_number *0.85)} to {int(random_number * 1.15)}")
+            time.sleep(2)
+    return player_guesses
+            
+def end():
+    print(f"You tried {player_guesses} times to guess my word\nThanks for playing!")
+
+
+    
+        
+main()
